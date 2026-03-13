@@ -1,1 +1,1 @@
-   worker: python test_slack.py
+worker: python main.py
