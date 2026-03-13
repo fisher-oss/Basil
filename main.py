@@ -96,8 +96,22 @@ Rules:
 - If the note contains multiple distinct tasks, return a JSON array of task objects
 """
 
-# ── Asana project cache ────────────────────────────────────────────────────────
+# ── Asana project/team cache ──────────────────────────────────────────────────
 _asana_project_cache = {}
+_asana_team_gid = None
+
+def get_team_gid():
+    """Get the first team in the workspace — required for project creation."""
+    global _asana_team_gid
+    if _asana_team_gid:
+        return _asana_team_gid
+    teams_api = asana.TeamsApi(asana_api_client)
+    teams = list(teams_api.get_teams_for_workspace(ASANA_WORKSPACE_GID, {"opt_fields": "gid,name"}))
+    if teams:
+        _asana_team_gid = teams[0]["gid"]
+        logger.info(f"Using Asana team: {teams[0]['name']} ({_asana_team_gid})")
+        return _asana_team_gid
+    raise Exception("No teams found in Asana workspace")
 
 def get_or_create_asana_project(project_name):
     if project_name in _asana_project_cache:
@@ -109,7 +123,8 @@ def get_or_create_asana_project(project_name):
             _asana_project_cache[project_name] = p["gid"]
             return p["gid"]
 
-    body = {"data": {"name": project_name, "workspace": ASANA_WORKSPACE_GID, "color": "light-blue"}}
+    team_gid = get_team_gid()
+    body = {"data": {"name": project_name, "workspace": ASANA_WORKSPACE_GID, "team": team_gid, "color": "light-blue"}}
     new_project = projects_api.create_project(body, {})
     _asana_project_cache[project_name] = new_project["gid"]
     logger.info(f"Created Asana project: {project_name}")
