@@ -1,0 +1,5 @@
+anthropic>=0.25.0
+slack-sdk>=3.27.0
+asana>=5.0.0
+schedule>=1.2.0
+python-dotenv>=1.0.0
