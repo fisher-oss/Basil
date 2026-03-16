@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basil</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: #F5F0E8;
+    font-family: 'EB Garamond', Georgia, serif;
+    color: #2C2416;
+  }
+  .page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F5F0E8;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8B89A' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .card {
+    background: #FDFAF4;
+    border: 1px solid #D4C4A0;
+    border-radius: 4px;
+    padding: 52px 48px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 2px 24px rgba(44,36,22,0.08);
+  }
+  .monogram {
+    width: 56px;
+    height: 56px;
+    border: 1.5px solid #8B6F3E;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #8B6F3E;
+    letter-spacing: 1px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: #2C2416;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #8B7355;
+    font-style: italic;
+    margin-bottom: 36px;
+    letter-spacing: 0.01em;
+  }
+  input[type="password"] {
+    width: 100%;
+    padding: 11px 16px;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 16px;
+    background: #F5F0E8;
+    border: 1px solid #C8B89A;
+    border-radius: 3px;
+    color: #2C2416;
+    margin-bottom: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type="password"]:focus { border-color: #8B6F3E; }
+  input[type="password"]::placeholder { color: #B0976B; font-style: italic; }
+  button {
+    width: 100%;
+    padding: 11px 16px;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 16px;
+    background: #2C2416;
+    color: #F5F0E8;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background 0.2s;
+  }
+  button:hover { background: #3D3220; }
+  .error {
+    font-size: 13px;
+    color: #8B3A2A;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .rule {
+    width: 40px;
+    height: 1px;
+    background: #C8B89A;
+    margin: 32px auto 0;
+  }
+  .footer {
+    font-size: 12px;
+    color: #B0976B;
+    margin-top: 14px;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="card">
+    <div class="monogram">B</div>
+    <h1>Basil</h1>
+    <p class="subtitle">Personal Assistant to Fisher</p>
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+    <form method="POST">
+      <input type="password" name="password" placeholder="Enter password" autofocus autocomplete="current-password">
+      <button type="submit">Enter</button>
+    </form>
+    <div class="rule"></div>
+    <p class="footer">Roger Scruton Legacy Foundation</p>
+  </div>
+</div>
+</body>
+</html>
